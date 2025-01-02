@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . models import Brand, Product, Profile, Rating, Review
+from . forms import ProductForm
 
 # Register your models here.
 
@@ -14,6 +15,7 @@ admin.site.register(Brand, BrandAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
+    form = ProductForm #Link the custom form
     list_display = (
         'id',
         'name',
