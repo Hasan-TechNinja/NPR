@@ -31,6 +31,7 @@ class Product(models.Model):
     description = models.TextField()
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='brand')
     image = models.ImageField(upload_to='Product/', validators=[validate_size])
+    qr_code = models.ImageField(upload_to='QR code/', blank=True)
 
     def __str__(self):
         return self.name

@@ -21,7 +21,8 @@ class ProductAdmin(admin.ModelAdmin):
         'name',
         'description',
         'brand',
-        'image'
+        'image',
+        'qr_code',
     )
 admin.site.register(Product, ProductAdmin)
 
