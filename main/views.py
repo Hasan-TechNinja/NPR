@@ -18,10 +18,10 @@ def ProductView(request):
 
 def ProductAdd(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)  # Include `request.FILES` for file uploads
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('product')  # Redirect to product list after successful addition
+            return redirect('product')
     else:
         form = ProductForm()
     

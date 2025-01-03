@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Registration{% endblock title %}
+
+{% block content %}
+<div>
+    <h2>Register</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% for form in form %}
+        <div>
+            {{ form.label_tag }}
+        </div>
+        <div>
+            {{ form }}
+        </div>
+        <p class="text-red-500">{{ form.errors | striptags }}</p> 
+        {% endfor %}
+        <button class="bg-blue-600 text-white rounded-md p-2" type="submit">Register</button>
+    </form>
+</div>
+{% endblock content %}
