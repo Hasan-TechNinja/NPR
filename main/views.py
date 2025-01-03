@@ -8,10 +8,10 @@ def HomeView(request):
     return render(request, 'home.html')
 
 def ProductView(request):
-    # user = request.user
     data = Product.objects.all()
+    print(data)
     context = {
-        data: 'data'
+        'data': data,
     }
     
     return render(request, 'product.html', context)

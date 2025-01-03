@@ -3,11 +3,13 @@
 {% block title %}Product{% endblock title %}
 {% block content %}
 <div>
-    <div>
+    <div class='m-2'>
         {% for product in data %}
-        {{ product.name }}
+            {{ product.name.as_p }}
+            {{ product.description }}
+            {{ product.image.url }}
         {% endfor %}
     </div>
-    <a href="{% url "add_product" %}">Add new product</a>
+    <a class="btn bg-blue-600 rounded-md p-2 text-white m-2" href="{% url "add_product" %}">Add new product</a>
 </div>
 {% endblock content %}
