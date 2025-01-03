@@ -5,11 +5,17 @@
 <div>
     <div class='m-2'>
         {% for product in data %}
-            {{ product.name.as_p }}
-            {{ product.description }}
-            {{ product.image.url }}
+        <div>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-32 h-32 object-cover">
+            {% else %}
+                <img src="{% static 'images/placeholder.png' %}" alt="Placeholder Image" class="w-32 h-32 object-cover">
+            {% endif %}
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+        </div>
         {% endfor %}
     </div>
-    <a class="btn bg-blue-600 rounded-md p-2 text-white m-2" href="{% url "add_product" %}">Add new product</a>
+    <a class="btn bg-blue-600 rounded-md p-2 text-white m-2" href="{% url 'add_product' %}">Add new product</a>
 </div>
 {% endblock content %}

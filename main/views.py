@@ -9,7 +9,6 @@ def HomeView(request):
 
 def ProductView(request):
     data = Product.objects.all()
-    print(data)
     context = {
         'data': data,
     }
@@ -19,15 +18,14 @@ def ProductView(request):
 
 def ProductAdd(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)  # Include `request.FILES` for file uploads
         if form.is_valid():
             form.save()
-            
-            return redirect('add_product')
+            return redirect('product')  # Redirect to product list after successful addition
     else:
-        form = ProductForm
+        form = ProductForm()
     
     context = {
-        'form':form
+        'form': form,
     }
     return render(request, 'addproduct.html', context)
