@@ -1,49 +1,81 @@
 <!DOCTYPE html>
 {% load static %}
-{% load static tailwind_tags %}
+{% load tailwind_tags %}
 <html lang="en">
+
 <head>
     {% tailwind_css %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %} {% endblock title %}</title>
 </head>
-<body class="container mx-auto">
-    <nav>
-        <div class="flex justify-between shadow-lg py-2 bg-blue-100 sm:rounded-full my-1">
-            <ul class="left flex space-x-2 ml-3 items-center">
-                <li><a class='hover:text-blue-800 hover:underline' href="{% url "home" %}">Home</a></li>
-                <li class="hover:underline hover:text-blue-800"><a href="{% url "product" %}">Product</a></li>
-                <li>About</li>
+
+<body class="min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-blue-100 shadow-lg py-3 sm:rounded-full">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <!-- Left Navigation -->
+            <ul class="flex space-x-2">
+                <li><a class="hover:text-blue-800 hover:underline font-medium text-sm" href="{% url 'home' %}">Home</a></li>
+                <li><a class="hover:text-blue-800 hover:underline font-medium text-sm" href="{% url 'product' %}">Product</a></li>
+                <li><a class="hover:text-blue-800 hover:underline font-medium text-sm" href="#">About</a></li>
             </ul>
-            <ul class="right flex space-x-2 mr-3 items-center">
+            <!-- Right Navigation -->
+            <ul class="flex items-center space-x-2">
                 {% if user.is_authenticated %}
-                <li><a href="{% url "logout" %}">Logout</a></li>
-                <li><a href="#">Name</a></li>
-                <li><img class="rounded-full ring-2 size-10 hover:ring-4" src="{% static "img/profile.jpeg" %}" alt="Image"></li>
+                <li><a class="hover:text-blue-800 hover:underline font-medium text-sm" href="{% url 'logout' %}">Logout</a></li>
+                <li><a class="font-medium text-sm hover:text-blue-800">{{ user.username }}</a></li>
+                <li><a class="hover:text-blue-800 hover:underline font-medium text-sm" href="{% url 'profile' %}">Profile</a></li>
+                <li>
+                    <a href="{% url 'profile' %}">
+                        <img class="w-10 h-10 rounded-full ring-2 hover:ring-4" src="{% static 'img/profile.jpeg' %}" alt="Profile Image">
+                    </a>
+                </li>
                 {% else %}
-                <li><a href="{% url "registration" %}">Registration</a></li>
-                <li><a href="{% url "login" %}">Login</a></li>
-                <li><img class="rounded-full ring-2 size-10 hover:ring-4" src="{% static "img/profile.jpg" %}" alt="Image"></li>
+                <li><a class="hover:text-blue-800 hover:underline font-medium text-sm" href="{% url 'registration' %}">Registration</a></li>
+                <li><a class="hover:text-blue-800 hover:underline font-medium text-sm" href="{% url 'login' %}">Login</a></li>
+                <li>
+                    <img class="w-10 h-10 rounded-full ring-2 hover:ring-4" src="{% static 'img/profile.jpg' %}" alt="Guest Profile">
+                </li>
                 {% endif %}
             </ul>
         </div>
     </nav>
 
-    {% block content %}{% endblock content %}
-    
-    <footer>
-        <div style="background-color: rgba(14, 18, 61, 1.0);" class="container w-full flex justify-between py-10 sm:rounded-t-lg absolute bottom-0">
-            <ul class="left">
-    
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-6">
+        <div class="container mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <!-- Left Section -->
+            <ul class="mx-2">
+                <h3 class="font-bold text-lg mb-2 text-white">Company</h3>
+                <li><a href="#" class="text-sm hover:text-blue-500">About Us</a></li>
+                <li><a href="#" class="text-sm hover:text-blue-500">Careers</a></li>
+                <li><a href="#" class="text-sm hover:text-blue-500">Press</a></li>
             </ul>
-            <ul class="mid">
-    
+            <!-- Middle Section -->
+            <ul class="mx-2">
+                <h3 class="font-bold text-lg mb-2 text-white">Support</h3>
+                <li><a href="#" class="text-sm hover:text-blue-500">Help Center</a></li>
+                <li><a href="#" class="text-sm hover:text-blue-500">Contact Us</a></li>
+                <li><a href="#" class="text-sm hover:text-blue-500">Privacy Policy</a></li>
             </ul>
-            <ul class="right">
-    
+            <!-- Right Section -->
+            <ul class="mx-2">
+                <h3 class="font-bold text-lg mb-2 text-white">Stay Connected</h3>
+                <li><a href="#" class="text-sm hover:text-blue-500">Facebook</a></li>
+                <li><a href="#" class="text-sm hover:text-blue-500">Twitter</a></li>
+                <li><a href="#" class="text-sm hover:text-blue-500">Instagram</a></li>
             </ul>
         </div>
-    </footer>    
+        <div class="text-center text-sm mt-6 text-gray-500">
+            © 2025 Your Company. All rights reserved.
+        </div>
+    </footer>
 </body>
+
 </html>

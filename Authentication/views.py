@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import EmailVerification
+from . models import EmailVerification
 
 # Create your views here.
 
@@ -57,10 +57,6 @@ def VerifyEmailView(request):
     return render(request, 'verify_email.html', context)
 
 
-
-
-
-
 def LoginView(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, data=request.POST)
@@ -100,3 +96,7 @@ def LogoutView(request):
     logout(request)
     messages.success(request, "You have successfully logged out.")
     return redirect('home')
+
+
+def profileView(request):
+    return render(request, 'profile.html')

@@ -43,6 +43,7 @@ def validate_size(image):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
+    price = models.CharField(max_length=100, default=0)
     description = models.TextField()
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products')  # Better related_name
     image = models.ImageField(upload_to='Product/', validators=[validate_size])

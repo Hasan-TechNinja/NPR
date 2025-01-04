@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from . forms import ProductForm
 from . models import Product
+from django.views import View
 
 # Create your views here.
 
@@ -29,3 +30,13 @@ def ProductAdd(request):
         'form': form,
     }
     return render(request, 'addproduct.html', context)
+
+
+class ProductDetails(View):
+    def get(self, request, id):
+        product = get_object_or_404(Product, pk=id)
+
+        context = {
+            'product':product,
+        }
+        return render(request, 'productDetails.html', context)
