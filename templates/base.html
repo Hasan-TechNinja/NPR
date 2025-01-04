@@ -17,9 +17,15 @@
                 <li>About</li>
             </ul>
             <ul class="right flex space-x-2 mr-3 items-center">
+                {% if user.is_authenticated %}
+                <li><a href="{% url "logout" %}">Logout</a></li>
+                <li><a href="#">Name</a></li>
+                <li><img class="rounded-full ring-2 size-10 hover:ring-4" src="{% static "img/profile.jpeg" %}" alt="Image"></li>
+                {% else %}
                 <li><a href="{% url "registration" %}">Registration</a></li>
                 <li><a href="{% url "login" %}">Login</a></li>
-                <li><img class="rounded-full ring-2 size-10 hover:ring-4" src="{% static "img/profile.jpeg" %}" alt="Image"></li>
+                <li><img class="rounded-full ring-2 size-10 hover:ring-4" src="{% static "img/profile.jpg" %}" alt="Image"></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
