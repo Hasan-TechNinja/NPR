@@ -48,6 +48,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products')  # Better related_name
     image = models.ImageField(upload_to='Product/', validators=[validate_size])
     qr_code = models.ImageField(upload_to='QR_code/', blank=True)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
