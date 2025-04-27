@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div class="container mx-auto">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for form in form %}
+        <p>
+            {{ form.label_tag }}
+        </p>
+        <p class="ring rounded ">
+            {{ form }}
+        </p>
+        {% if form.errors %}
+        <p class="text-red-600">{{ form.errors }}</p>
+        {% endif %}
+        {% endfor %}
+        <button type="submit" class='bg-blue-600 text-white rounded p-2 mt-2'>Brand Request</button>
+    </form>
+</div>
+{% endblock content %}

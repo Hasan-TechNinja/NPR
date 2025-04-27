@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+{% comment %} {% load static tailwind_tags %} {% endcomment %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} {% tailwind_css %} {% endcomment %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <nav class="container mx-auto flex justify-between bg-blue-100 rounded-full items-center py-4">
+        <ul class="flex justify-around space-x-2 ml-2">
+            <li><a href="{% url "home" %}"><img src="{% static "img/logo.jpg" %}" alt=""></a></li>
+            <li><a href="{% url "home" %}">Home</a></li>
+        </ul>
+        <ul class="flex justify-around space-x-2 mr-2">
+            <li><a href="{% url "createbrand" %}">CreateBrand</a></li>
+            <li><a href="#"></a>Item</li>
+            <li><a href="#"></a>Item</li>
+            <li><a href="#"></a>Item</li>
+        </ul>
+    </nav>
+
+    {% block content %}{% endblock content %}
+
+    <footer class="container mx-auto bg">
+
+    </footer>
+</body>
+</html>
