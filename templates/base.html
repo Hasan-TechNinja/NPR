@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 {% load static %}
-{% comment %} {% load static tailwind_tags %} {% endcomment %}
+{% load static tailwind_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% comment %} {% tailwind_css %} {% endcomment %}
+    {% tailwind_css %}
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
             <li><a href="{% url "home" %}">Home</a></li>
         </ul>
         <ul class="flex justify-around space-x-2 mr-2">
-            <li><a href="{% url "createbrand" %}">CreateBrand</a></li>
+            <li><a href="{% url "home" %}">CreateBrand</a></li>
             <li><a href="#"></a>Item</li>
             <li><a href="#"></a>Item</li>
             <li><a href="#"></a>Item</li>

@@ -8,7 +8,7 @@ class Brand(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to="brand/")
     created = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -19,7 +19,7 @@ class Category(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='category/')
     created = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -44,7 +44,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to="product/")
     rating = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -57,7 +57,7 @@ class Review(models.Model):
     vote_score = models.IntegerField(default=0)
     visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.review}"
+        return f"{self.product.name}"
