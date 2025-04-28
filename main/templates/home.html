@@ -3,10 +3,16 @@
 {% block title %}Home{% endblock title %}
 {% block content %}
 <div class="container mx-auto">
-    <div class="justify-center text-center my-10">
-        <h1>Find The Product You Can Trust</h1>
-        <h3>Real views by real people</h3>
-        <input class="border" type="text">
+    <div class="justify-center text-center py-10 bg-blue-200 rounded md:rounded-b-full">
+        <h1 class="text-2xl font-bold">Find The Product You Can Trust</h1>
+        <h3 class="font-bold">Real views by real people</h3>
+        <div>
+            <input class="border mt-5 rounded" type="text">
+            <input type="button" value="search" class="bg-blue-500 text-white p-1 px-2 mx-3 rounded ">
+        </div>
+    </div>
+    <div>
+        <h3 class="my-5 font-bold">What are you looking for?</h3>
     </div>
 </div>
 {% endblock content %}

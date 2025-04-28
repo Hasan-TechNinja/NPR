@@ -9,16 +9,18 @@
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
-    <nav class="container mx-auto flex justify-between bg-blue-100 rounded-full items-center py-4">
+    <nav class="container mx-auto flex justify-between bg-blue-100 md:rounded-full items-center py-4">
         <ul class="flex justify-around space-x-2 ml-2">
             <li><a href="{% url "home" %}"><img src="{% static "img/logo.jpg" %}" alt=""></a></li>
             <li><a href="{% url "home" %}">Home</a></li>
         </ul>
         <ul class="flex justify-around space-x-2 mr-2">
-            <li><a href="{% url "home" %}">CreateBrand</a></li>
-            <li><a href="#"></a>Item</li>
-            <li><a href="#"></a>Item</li>
-            <li><a href="#"></a>Item</li>
+            {% if user.is_authenticated %}
+            <li><a href="#"></a><img src="#" alt="profile"></li>
+            <li><a href="{% url "logout" %}">logout</a></li>
+            {% else %}
+            <li><a href="#"></a>login</li>
+            {% endif %}
         </ul>
     </nav>
 
