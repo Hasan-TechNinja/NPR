@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Create an Account</h2>
+    <form action="" method="POST" class="space-y-4">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        {% if form.errors %}
+            <div class="text-red-600 text-sm">
+                Please fix the errors below.
+            </div>
+        {% endif %}
+
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">
+            Sign Up
+        </button>
+    </form>
+</div>
+{% endblock content %}

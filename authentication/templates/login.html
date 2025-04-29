@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}NPR Login{% endblock %}
+{% load socialaccount %}
+{% block content %}
+
+<!-- Container -->
+<div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div class="bg-white p-8 rounded-xl shadow-md">
+            <h2 class="text-center text-3xl font-extrabold text-gray-900 mb-6">Welcome!</h2>
+
+            <!-- Google Sign Up -->
+            <a href="{% provider_login_url 'google' %}" class="w-full flex justify-center items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-300 mb-4">
+                <img src="https://playtht-website-assets.s3.amazonaws.com/img/brand/google.svg" alt="Google logo" class="w-5 h-5">
+                Sign up with Google
+            </a>
+
+            <div class="flex items-center justify-center mb-4">
+                <span class="text-gray-500 text-sm">or use your email</span>
+            </div>
+
+            <!-- Email Login Form -->
+            <form class="space-y-5" action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div>
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <p class="text-red-600 text-sm">{{ field.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Login
+                </button>
+            </form>
+            
+
+            <!-- Divider -->
+            <div class="my-6 flex items-center">
+                <div class="w-full h-px bg-gray-300"></div>
+            </div>
+
+            <!-- Forgot Password -->
+            <p class="text-center text-sm text-gray-600">
+                Forgot your password?
+                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Reset</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

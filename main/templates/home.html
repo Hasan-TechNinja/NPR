@@ -2,17 +2,99 @@
 {% load static %}
 {% block title %}Home{% endblock title %}
 {% block content %}
+<head>
+    
+    <style>
+		.glider > div{
+			width: 200px;
+			height: 120px;
+			padding: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.container{
+			width: 90%;
+			margin : 10px auto;
+		}
+	</style>
+</head>
+
 <div class="container mx-auto">
-    <div class="justify-center text-center py-10 bg-blue-200 rounded md:rounded-b-full">
+    <div class="justify-center text-center py-10 bg-blue-200 rounded md:rounded-b-3xl">
         <h1 class="text-2xl font-bold">Find The Product You Can Trust</h1>
         <h3 class="font-bold">Real views by real people</h3>
         <div>
             <input class="border mt-5 rounded" type="text">
-            <input type="button" value="search" class="bg-blue-500 text-white p-1 px-2 mx-3 rounded ">
+            <input type="button" value="search" class="bg-blue-500 text-white p-1 px-2 mx-3 rounded">
         </div>
+    </div>
+    <div class="container">
+        <div class="glider-contain">
+        <div class="glider">
+            <div>
+                One
+            </div>
+            <div>
+                Two
+            </div>
+            <div>
+                Three
+            </div>
+            <div>
+                Four
+            </div>
+            <div>
+                Five
+            </div>
+            <div>
+                Six
+            </div>
+            <div>
+                Seven
+            </div>
+        </div>
+        <button class="glider-prev">&laquo;</button>
+        <button class="glider-next">&raquo;</button>
+    </div>
     </div>
     <div>
         <h3 class="my-5 font-bold">What are you looking for?</h3>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    // Carousel
+    document.querySelectorAll('.glider').forEach(gliderEl => {
+        new Glider(gliderEl, {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            draggable: true,
+            dots: null,
+            arrows: {
+                prev: gliderEl.parentElement.querySelector('.glider-prev'),
+                next: gliderEl.parentElement.querySelector('.glider-next')
+            },
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 6,
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1,
+                    }
+                }
+            ]
+        });
+    });
+})
+</script>
 {% endblock content %}

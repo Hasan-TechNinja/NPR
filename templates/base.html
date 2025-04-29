@@ -7,26 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_css %}
     <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'glider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'glider.min.js' %}"></script>
 </head>
 <body>
     <nav class="container mx-auto flex justify-between bg-blue-100 md:rounded-full items-center py-4">
         <ul class="flex justify-around space-x-2 ml-2">
-            <li><a href="{% url "home" %}"><img src="{% static "img/logo.jpg" %}" alt=""></a></li>
+            <li><a href="{% url "home" %}"><img src="{% static "img/logo.png" %}" alt="img" class="h-6 w-8"></a></li>
             <li><a href="{% url "home" %}">Home</a></li>
         </ul>
         <ul class="flex justify-around space-x-2 mr-2">
             {% if user.is_authenticated %}
-            <li><a href="#"></a><img src="#" alt="profile"></li>
+            <li><a href="#"></a><img src="#" alt=""></li>
+            <li><a href="#">{{request.user.username}}</a></li>
             <li><a href="{% url "logout" %}">logout</a></li>
             {% else %}
-            <li><a href="#"></a>login</li>
+            <li><a href="{% url "login" %}">login</a></li>
+            <li><a href="{% url "registration" %}">Sing up</a></li>
             {% endif %}
         </ul>
     </nav>
 
     {% block content %}{% endblock content %}
 
-    <footer class="container mx-auto bg">
+    <footer class="container mx-auto">
 
     </footer>
 </body>

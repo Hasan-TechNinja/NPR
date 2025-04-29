@@ -25,6 +25,8 @@ urlpatterns = [
     path('', include('main.urls')),
     path('auth/', include('authentication.urls')),
 
+    path("socialauth/",include('allauth.urls')),
+
     path("__reload__/", include("django_browser_reload.urls")),
 ]
 
