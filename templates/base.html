@@ -20,7 +20,7 @@
         <ul class="flex justify-around space-x-2 mr-2">
             {% if user.is_authenticated %}
             <li><a href="#"></a><img src="#" alt=""></li>
-            <li><a href="#">{{request.user.username}}</a></li>
+            <li><a href="#">{{ request.user.username|striptags|capfirst }}</a></li>
             <li><a href="{% url "logout" %}">logout</a></li>
             {% else %}
             <li><a href="{% url "login" %}">login</a></li>
@@ -32,7 +32,6 @@
     {% block content %}{% endblock content %}
 
     <footer class="container mx-auto">
-
     </footer>
 </body>
 </html>

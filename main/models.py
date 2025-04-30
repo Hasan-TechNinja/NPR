@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Brand(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to="brand/")
+    description = models.TextField(blank=True, null=True, max_length=500)
+    image = models.ImageField(upload_to="brand/", default='brand/default.png')
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
@@ -16,8 +16,8 @@ class Brand(models.Model):
 class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to='category/')
+    description = models.TextField(blank=True, null=True, max_length=500)
+    image = models.ImageField(upload_to='category/', default='category/default.png')
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
@@ -40,8 +40,8 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='brand')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
-    description = models.TextField()
-    image = models.ImageField(upload_to="product/")
+    description = models.TextField(blank=True, null=True, max_length=500)
+    image = models.ImageField(upload_to="product/", default='product/default.png')
     rating = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     active = models.BooleanField(default=True)
