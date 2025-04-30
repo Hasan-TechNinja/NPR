@@ -4,7 +4,7 @@
 {% block content %}
 <head>
     
-    <style>
+    {% comment %} <style>
 		.glider > div{
 			width: 200px;
 			height: 120px;
@@ -18,7 +18,7 @@
 			width: 90%;
 			margin : 10px auto;
 		}
-	</style>
+	</style> {% endcomment %}
 </head>
 
 <div class="container mx-auto">
@@ -30,36 +30,64 @@
             <input type="button" value="search" class="bg-blue-500 text-white p-1 px-2 mx-3 rounded">
         </div>
     </div>
-    <div class="container">
-        <div class="glider-contain">
-        <div class="glider">
-            <div>
-                One
+    <div class="glider-contain mx-2 w-screen">
+        <h2 class="md:text-lg md:font-bold mt-3 mx-2">Top-Rated Products?</h2>
+        <div class="glider flex overflow-x-auto gap-4 p-4">
+
+            <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0 border">
+              <img src="{% static "product.jpg" %}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
+              <p class="md:text-lg font-semibold text-gray-800">Name of the product</p>
+              <p class="text-sm text-gray-500">Category</p>
+              <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
             </div>
-            <div>
-                Two
+          
+            <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0">
+              <img src="{% static "product.jpg" %}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
+              <p class="md:text-lg font-semibold text-gray-800">Name of the product</p>
+              <p class="text-sm text-gray-500">Category</p>
+              <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
             </div>
-            <div>
-                Three
+          
+            <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0">
+              <img src="{% static "product.jpg" %}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
+              <p class="md:text-lg font-semibold text-gray-800">Name of the product</p>
+              <p class="text-sm text-gray-500">Category</p>
+              <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
             </div>
-            <div>
-                Four
+          
+            <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0">
+              <img src="{% static "product.jpg" %}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
+              <p class="md:text-lg font-semibold text-gray-800">Name of the product</p>
+              <p class="text-sm text-gray-500">Category</p>
+              <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
             </div>
-            <div>
-                Five
+
+            <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0">
+              <img src="{% static "product.jpg" %}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
+              <p class="md:text-lg font-semibold text-gray-800">Name of the product</p>
+              <p class="text-sm text-gray-500">Category</p>
+              <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
             </div>
-            <div>
-                Six
+
+            <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0">
+              <img src="{% static "product.jpg" %}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
+              <p class="md:text-lg font-semibold text-gray-800">Name of the product</p>
+              <p class="text-sm text-gray-500">Category</p>
+              <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
             </div>
-            <div>
-                Seven
+
+            <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0">
+              <img src="{% static "product.jpg" %}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
+              <p class="md:text-lg font-semibold text-gray-800">Name of the product</p>
+              <p class="text-sm text-gray-500">Category</p>
+              <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
             </div>
-        </div>
+          </div>
+          
         <button class="glider-prev">&laquo;</button>
         <button class="glider-next">&raquo;</button>
     </div>
-    </div>
-    <div>
+</div>          
         <h3 class="my-5 font-bold">What are you looking for?</h3>
     </div>
 </div>
