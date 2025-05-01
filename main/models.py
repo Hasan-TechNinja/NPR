@@ -42,7 +42,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
     description = models.TextField(blank=True, null=True, max_length=500)
     image = models.ImageField(upload_to="product/", default='product/default.png')
-    rating = models.PositiveIntegerField()
+    rating = models.PositiveIntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     active = models.BooleanField(default=True)
 
