@@ -49,12 +49,20 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name}"
     
+class Vote(models.Model):
+    reactor = models.ForeignKey(User, on_delete=models.CASCADE)
+    positive = models.BooleanField(default=False)
+    negative = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Reacted by {self.reactor.username}"
 
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
-    review = models.TextField(max_length=500)
+    review = models.TextField(max_length=800)
     rating = models.PositiveIntegerField()
-    vote_score = models.IntegerField(default=0)
+    vote = models.ForeignKey(Vote, on_delete=models.CASCADE)
     visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
