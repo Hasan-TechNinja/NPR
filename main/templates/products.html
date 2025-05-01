@@ -2,19 +2,19 @@
 {% load static %}
 
 {% block title %}
-Brands
+Products
 {% endblock title %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-10">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Our Brands</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Our Products</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {% for brand in brands %}
+        {% for product in product %}
             <div class="bg-white shadow-lg rounded-2xl overflow-hidden transition-transform transform hover:scale-105">
                 <a href="#" class="block text-center p-6">
-                    <img src="{{ brand.image.url }}" alt="{{ brand.name }}" class="h-20 mx-auto mb-4 object-contain">
-                    <h2 class="text-lg font-semibold text-gray-700">{{ brand.name }}</h2>
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="h-20 mx-auto mb-4 object-contain">
+                    <h2 class="text-lg font-semibold text-gray-700">{{ product.name }}</h2>
                 </a>
             </div>
         {% empty %}

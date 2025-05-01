@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div class="container mx-auto">
+    <p>
+        {{ user.username }}
+    </p>
+    <p>
+        {{ user.email_address }}
+    </p>
+</div>
+{% endblock content %}

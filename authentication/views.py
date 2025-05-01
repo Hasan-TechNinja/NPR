@@ -5,6 +5,13 @@ from . forms import CustomUserCreationForm, CustomAuthenticationForm
 
 # Create your views here.
 
+def ProfileView(request):
+    user = request.user
+    context = {
+        'user':user
+    }
+    return render(request, 'profile.html', context)
+
 def LogoutView(request):
     logout(request)
     return redirect('home')

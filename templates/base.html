@@ -22,11 +22,11 @@
         </ul>
         <ul class="flex justify-around md:space-x-4 mr-2">
             {% if user.is_authenticated %}
-            <li><a href="#"><i class="fas fa-box"></i> Products</a></li>
+            <li><a href="{% url "product" %}"><i class="fas fa-box"></i> Products</a></li>
             <li><a href="{% url "category" %}"><i class="fas fa-list"></i> Categories</a></li>
             <li><a href="{% url "brands" %}"><i class="fas fa-tags"></i> Brands</a></li>
             <li><a href="#"></a><img src="#" alt="img"></li>
-            <li><a href="#">{{ request.user.username|striptags|capfirst }}</a></li>
+            <li><a href="{% url "profile" %}">{{ request.user.username|striptags|capfirst }}</a></li>
             <li><a href="{% url "logout" %}">logout</a></li>
             {% else %}
             <li><a href="{% url "login" %}">login</a></li>

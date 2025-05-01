@@ -54,3 +54,11 @@ def CategoryView(request):
         'categorys':category
     }
     return render(request, 'categorys.html', context)
+
+
+def ProductView(request):
+    products = Product.objects.all()
+    context = {
+        'product':products
+    }
+    return render(request, 'products.html', context)
