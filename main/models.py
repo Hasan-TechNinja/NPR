@@ -49,23 +49,39 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name}"
     
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
+    review = models.TextField(max_length=800)
+    rating = models.PositiveIntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Review by {self.user.username} on {self.product.name} - Rating: {self.rating}"
+
+
 class Vote(models.Model):
+    review = models.ForeignKey('Review', on_delete=models.CASCADE, related_name='votes')
     reactor = models.ForeignKey(User, on_delete=models.CASCADE)
     positive = models.BooleanField(default=False)
     negative = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f"Reacted by {self.reactor.username}"
+    class Meta:
+        unique_together = ('review', 'reactor')  # ✅ Ensures one vote per user per review
 
-class Review(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
-    review = models.TextField(max_length=800)
-    rating = models.PositiveIntegerField()
-    vote = models.ForeignKey(Vote, on_delete=models.CASCADE)
-    visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=True)
+    def save(self, *args, **kwargs):
+        # Ensure only one reaction at a time (positive or negative, not both)
+        if self.positive and self.negative:
+            raise ValueError("A vote can't be both positive and negative.")
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.product.name}"
+        if self.positive:
+            return f"{self.reactor.username} voted 👍"
+        elif self.negative:
+            return f"{self.reactor.username} voted 👎"
+        return f"{self.reactor.username} removed vote"
+

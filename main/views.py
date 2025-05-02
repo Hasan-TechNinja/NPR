@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from . forms import BrandModelForm
-from . models import Brand, Category, Product, Review
+from . models import Brand, Category, Product
 
 # Create your views here.
 
@@ -32,12 +32,17 @@ class BrandView(View):
         }
         return render(request, 'create_brand.html')
     
-def ProductDetails(request, pk):
-    product = get_object_or_404(Product, pk = pk)
-    context = {
-        'product':product
-    }
-    return render(request, 'productdetails.html', context)
+class ProductDetailsView(View):
+    def get(self, request, pk):
+        product = get_object_or_404(Product, pk = pk) 
+        review = Review.objects.filter(product = product) 
+        context = {
+            'product':product,
+            'review':review
+        }
+
+        return render(request, 'productdetails.html', context)
+
 
 
 def BrandsView(request):

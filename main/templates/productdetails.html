@@ -16,8 +16,7 @@ About {{ product.name }}
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover" />
             </div>
         </div>
-        
-
+    
         <!-- Product Details -->
         <div class="md:w-1/2 w-full">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ product.name }}</h2>
@@ -32,15 +31,47 @@ About {{ product.name }}
             <div class="mt-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-2">Description</h3>
                 <p class="text-gray-600 leading-relaxed">{{ product.description|linebreaksbr }}</p>
-            </div>
-
-            <!-- Optional: Add to Cart / Buy Button -->
-            {% comment %} <div class="mt-6">
-                <a href="{% url 'add_to_cart' product.id %}" class="inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
-                    Add to Cart
-                </a>
-            </div> {% endcomment %}
+            </div>            
         </div>
     </div>
+
+    <div class="max-w-2xl bg-white shadow-md rounded-xl p-6 mt-10">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Leave a Review</h2>
+
+        <div>
+            <h2>Review</h2>
+            {% for review in review %}
+            <p>
+                {{ review.review }}
+            </p>
+            <p>
+                {{ review.ratting }}
+            </p>
+            <p>
+                {{ review.vote }}
+            </p>
+            {% endfor %}
+        </div>
+    
+        <form action="" method="POST" class="space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1" for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+    
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                Submit Review
+            </button>
+        </form>
+    </div>
+    
 </div>
 {% endblock content %}
