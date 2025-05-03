@@ -1,5 +1,5 @@
 from django import forms
-from . models import Brand, Category, Product
+from . models import Brand, Category, Product, Review
 
 
 class BrandModelForm(forms.ModelForm):
@@ -8,7 +8,7 @@ class BrandModelForm(forms.ModelForm):
         exclude = ["user", "created", "status"]
 
 
-# class ReviewModelForm(forms.ModelForm):
-#     class Meta:
-#         model = Review
-#         fields = { 'review', 'rating', 'vote'}
+class ReviewModelForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = { 'review', 'rating'}

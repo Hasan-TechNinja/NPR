@@ -38,8 +38,8 @@ class Visitor(models.Model):
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='brand')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='brands')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categorys')
     description = models.TextField(blank=True, null=True, max_length=500)
     image = models.ImageField(upload_to="product/", default='product/default.png')
     rating = models.PositiveIntegerField(default=0)
@@ -52,7 +52,7 @@ class Product(models.Model):
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
     review = models.TextField(max_length=800)
     rating = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now_add=True)
@@ -69,19 +69,4 @@ class Vote(models.Model):
     negative = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        unique_together = ('review', 'reactor')  # ✅ Ensures one vote per user per review
-
-    def save(self, *args, **kwargs):
-        # Ensure only one reaction at a time (positive or negative, not both)
-        if self.positive and self.negative:
-            raise ValueError("A vote can't be both positive and negative.")
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        if self.positive:
-            return f"{self.reactor.username} voted 👍"
-        elif self.negative:
-            return f"{self.reactor.username} voted 👎"
-        return f"{self.reactor.username} removed vote"
 

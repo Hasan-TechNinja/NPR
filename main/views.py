@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from . forms import BrandModelForm
-from . models import Brand, Category, Product
+from . forms import BrandModelForm, ReviewModelForm
+from . models import Brand, Category, Product, Review, Vote
 
 # Create your views here.
 
@@ -34,15 +34,43 @@ class BrandView(View):
     
 class ProductDetailsView(View):
     def get(self, request, pk):
-        product = get_object_or_404(Product, pk = pk) 
-        review = Review.objects.filter(product = product) 
-        context = {
-            'product':product,
-            'review':review
-        }
+        product = get_object_or_404(Product, pk=pk)
+        reviews = Review.objects.filter(product=product, active=True)
+        form = ReviewModelForm()
 
+        context = {
+            'product': product,
+            'review': reviews,
+            'form': form
+        }
         return render(request, 'productdetails.html', context)
 
+
+def PostReview(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    reviews = Review.objects.filter(product=product, active=True)
+
+    user_review = Review.objects.filter(product=product, user=request.user).first()
+
+    if request.method == 'POST':
+        form = ReviewModelForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.product = product
+            review.active = True
+            review.save()
+            form = ReviewModelForm()  # Clear form after submission
+            return redirect('postReview', pk=product.pk)
+    else:
+        form = ReviewModelForm(instance=user_review)
+
+    context = {
+        "product": product,
+        "reviews": reviews,
+        "form": form
+    }
+    return render(request, 'postreview.html', context)
 
 
 def BrandsView(request):
