@@ -14,4 +14,6 @@ urlpatterns = [
     path('product/', views.ProductView, name='product'),
     path('postRev/<int:pk>', views.PostReview, name='postReview'),
     path('search/', views.search, name='search'),
+    path('helpful/<int:pk>', views.Helpful, name='helpful'),
+    path('nhelpful/<int:pk>', views.NotHelpful, name='nhelpful'),
 ]

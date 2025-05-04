@@ -48,12 +48,14 @@ class ProductDetailsView(View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
         reviews = Review.objects.filter(product=product, active=True)
+        total_reviews = len(reviews)
         form = ReviewModelForm()
 
         context = {
             'product': product,
             'review': reviews,
-            'form': form
+            'form': form,
+            'total_reviews': total_reviews
         }
         return render(request, 'productdetails.html', context)
     
@@ -95,6 +97,19 @@ def PostReview(request, pk):
     }
     return render(request, 'postreview.html', context)
 
+def Helpful(request, pk):
+    review = Review.objects.get(id=pk)
+    for i in range(1):
+        review.helpful = review.helpful + 1
+        review.save()
+        return redirect('home')
+
+def NotHelpful(request, pk):
+    review = Review.objects.get(id = pk)
+    review.not_helpful += 1
+    review.save()
+    return redirect('home')
+
 
 def BrandsView(request):
     brands = Brand.objects.all()
@@ -120,16 +135,6 @@ def ProductView(request):
     return render(request, 'products.html', context)
 
 
-# def search(request):
-#     if request.method == 'GET':
-#         query = request.GET.get('query')
-#         if query:
-#             product = Product.objects.filter(
-#                 Q(name__icontains=query) | Q(brand__icontains=query | Q(category__icontains=query))
-#             )
-#             return render(request, 'search.html', {'product': product})
-#         else:
-#             return render(request, 'search.html')
 
 def search(request):
     if request.method == 'GET':
@@ -138,7 +143,8 @@ def search(request):
             product = Product.objects.filter(
             Q(name__icontains=query) |
             Q(brand__name__icontains=query) |
-            Q(category__name__icontains=query)
+            Q(category__name__icontains=query) |
+            Q(id__icontains=query)
 )
 
             return render(request, 'search.html', {'product': product, 'query': query})

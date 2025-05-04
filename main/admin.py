@@ -25,13 +25,13 @@ admin.site.register(Product, ProductAdmin)
 
 class VoteAdmin(admin.ModelAdmin):
     list_display = (
-       'review', 'reactor', 'positive', 'negative', 'created'
+      'id', 'review', 'reactor', 'positive', 'negative', 'created'
     )
 admin.site.register(Vote, VoteAdmin)
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
-        'product', 'review', 'rating', 'created', 'active'
+       'id', 'product', 'review', 'rating', 'created', 'helpful', 'not_helpful', 'active'
     )
 admin.site.register(Review)
 

@@ -55,11 +55,13 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
     review = models.TextField(max_length=800)
     rating = models.PositiveIntegerField()
+    helpful = models.PositiveIntegerField(default=0)
+    not_helpful = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Review by {self.user.username} on {self.product.name} - Rating: {self.rating}"
+        return f"Review by {self.user} on {self.product.name} - Rating: {self.rating}"
 
 
 class Vote(models.Model):

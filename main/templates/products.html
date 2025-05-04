@@ -15,6 +15,7 @@ Products
                 <a href="{% url "pDetails" product.id %}" class="block text-center p-6">
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="h-20 mx-auto mb-4 object-contain">
                     <h2 class="text-lg font-semibold text-gray-700">{{ product.name }}</h2>
+                    <p>Code: {{ product.id }}</p>
                 </a>
             </div>
         {% empty %}
