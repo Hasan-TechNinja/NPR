@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('brands/', views.BrandsView, name='brands'),
     path('category/', views.CategoryView, name='category'),
+    path('catdetails/<int:pk>', views.CategoryDetails.as_view(), name="catdetails"),
     path('product/', views.ProductView, name='product'),
     path('postRev/<int:pk>', views.PostReview, name='postReview'),
 ]

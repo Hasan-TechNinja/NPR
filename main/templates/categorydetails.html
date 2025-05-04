@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ category.name }} - Details{% endblock title %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Category Details Section -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Category Details</h2>
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+            <img src="{{ category.image.url }}" alt="{{ category.name }}" class="w-64 h-64 object-cover rounded-lg shadow-sm">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-700">{{ category.name }}</h3>
+                <p class="mt-2 text-gray-600">{{ category.description }}</p>
+                <p class="mt-4 text-sm text-gray-500">Created: {{ category.created }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtered Products Section -->
+    <div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Products in this Category</h3>
+        {% if product %}
+        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+            {% for item in product %}
+            <div class="bg-white rounded-lg shadow-md hover:shadow-md transition duration-300 text-center items-center justify-center">
+                <a href="{% url "pDetails" item.id %}">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-50 h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <h4 class="text-lg font-semibold text-gray-800">{{ item.name }}</h4>
+                        <p class="mt-2 text-gray-600 text-sm">{{ item.description|truncatechars:100 }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-gray-600">No products available in this category.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

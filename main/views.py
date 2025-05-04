@@ -44,6 +44,17 @@ class ProductDetailsView(View):
             'form': form
         }
         return render(request, 'productdetails.html', context)
+    
+class CategoryDetails(View):
+    def get(self, request, pk):
+        category = Category.objects.get(pk = pk, active = True)
+        product = Product.objects.filter(category=category)
+        
+        context = {
+            'category':category,
+            'product':product
+        }
+        return render(request, 'categorydetails.html', context)
 
 
 def PostReview(request, pk):
