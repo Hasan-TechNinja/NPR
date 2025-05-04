@@ -8,6 +8,7 @@ urlpatterns = [
     path('prodtls/<int:pk>', views.ProductDetailsView.as_view(), name='pDetails'),
 
     path('brands/', views.BrandsView, name='brands'),
+    path('brandtls/<int:pk>', views.BrandDetailsView.as_view(), name="brandDetails"),
     path('category/', views.CategoryView, name='category'),
     path('catdetails/<int:pk>', views.CategoryDetails.as_view(), name="catdetails"),
     path('product/', views.ProductView, name='product'),

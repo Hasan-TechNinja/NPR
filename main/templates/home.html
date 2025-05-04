@@ -35,12 +35,14 @@
         <div class="glider flex overflow-x-auto gap-4 p-4">
           {% for category in category %}
             {% if category.active == True %}
-              <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0 border">
-                <img src="{{ category.image.url }}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
-                <p class="md:text-lg font-semibold text-gray-800">{{ category.name }}</p>
-                <p class="text-sm text-gray-500">{{ category.description|striptags|truncatechars:68 }}</p>
-                <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
-              </div>
+              <a href="{% url "catdetails" category.id %}">
+                <div class="min-w-[200px] bg-white rounded-xl shadow-md p-4 flex-shrink-0 border">
+                    <img src="{{ category.image.url }}" alt="image" class="w-full h-40 object-cover rounded-md mb-3">
+                    <p class="md:text-lg font-semibold text-gray-800">{{ category.name }}</p>
+                    <p class="text-sm text-gray-500">{{ category.description|striptags|truncatechars:68 }}</p>
+                    <p class="text-md font-bold text-indigo-600 mt-1">$800</p>
+                  </div>
+              </a>
             {% endif %}
           {% endfor %}
           </div>            

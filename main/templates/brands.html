@@ -8,15 +8,13 @@ Brands
 {% block content %}
 <div class="container mx-auto px-4 py-10">
     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Our Brands</h1>
-
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {% for brand in brands %}
-            <div class="bg-white shadow-lg rounded-2xl overflow-hidden transition-transform transform hover:scale-105">
-                <a href="#" class="block text-center p-6">
-                    <img src="{{ brand.image.url }}" alt="{{ brand.name }}" class="h-20 mx-auto mb-4 object-contain">
-                    <h2 class="text-lg font-semibold text-gray-700">{{ brand.name }}</h2>
-                </a>
-            </div>
+            <a href="{% url 'brandDetails' brand.id %}" class="block bg-white shadow-lg rounded-2xl overflow-hidden transition-transform transform hover:scale-105 p-6 text-center">
+                <img src="{{ brand.image.url }}" alt="{{ brand.name }}" class="h-20 mx-auto mb-4 object-contain">
+                <h2 class="text-lg font-semibold text-gray-700">{{ brand.name }}</h2>
+            </a>
         {% empty %}
             <p class="col-span-full text-center text-gray-500">No brands available at the moment.</p>
         {% endfor %}

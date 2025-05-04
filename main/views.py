@@ -32,6 +32,17 @@ class BrandView(View):
         }
         return render(request, 'create_brand.html')
     
+class BrandDetailsView(View):
+    def get(self, request, pk):
+        brand = Brand.objects.get(id = pk)
+        product = Product.objects.filter(brand = brand, active = True)
+
+        context = {
+            'brand':brand,
+            'product':product
+        }
+        return render(request, 'branddetails.html', context)
+    
 class ProductDetailsView(View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
@@ -49,7 +60,7 @@ class CategoryDetails(View):
     def get(self, request, pk):
         category = Category.objects.get(pk = pk, active = True)
         product = Product.objects.filter(category=category)
-        
+
         context = {
             'category':category,
             'product':product

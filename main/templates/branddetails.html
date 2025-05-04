@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ brand.name }} - Brand Details{% endblock title %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Brand Details Section -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Brand Details</h2>
+        <div class="flex flex-col md:flex-row items-center gap-6">
+            <img src="{{ brand.image.url }}" alt="{{ brand.name }}" class="w-64 h-64 object-cover rounded-lg shadow-sm">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-700">{{ brand.name }}</h3>
+                <p class="mt-2 text-gray-600">{{ brand.description }}</p>
+                <p class="mt-4 text-sm text-gray-500">Created: {{ brand.created }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brand Products Section -->
+    <div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Products by {{ brand.name }}</h2>
+        {% if product %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {% for item in product %}
+            <a href="{% url "pDetails" item.id %}">
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4 text-center">
+                        <h4 class="text-lg font-semibold text-gray-800">{{ item.name }}</h4>
+                        <p class="mt-2 text-gray-600 text-sm">{{ item.description|truncatechars:100 }}</p>
+                        <p class="mt-2 text-indigo-600 font-semibold">${{ item.price }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-gray-600">No products found for this brand.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
