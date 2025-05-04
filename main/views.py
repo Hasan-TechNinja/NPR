@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from . forms import BrandModelForm, ReviewModelForm
 from . models import Brand, Category, Product, Review, Vote
+from django.db.models import Q
 
 # Create your views here.
 
@@ -117,3 +118,29 @@ def ProductView(request):
         'product':products
     }
     return render(request, 'products.html', context)
+
+
+# def search(request):
+#     if request.method == 'GET':
+#         query = request.GET.get('query')
+#         if query:
+#             product = Product.objects.filter(
+#                 Q(name__icontains=query) | Q(brand__icontains=query | Q(category__icontains=query))
+#             )
+#             return render(request, 'search.html', {'product': product})
+#         else:
+#             return render(request, 'search.html')
+
+def search(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            product = Product.objects.filter(
+            Q(name__icontains=query) |
+            Q(brand__name__icontains=query) |
+            Q(category__name__icontains=query)
+)
+
+            return render(request, 'search.html', {'product': product, 'query': query})
+        else:
+            return render(request, 'search.html', {'product': []})

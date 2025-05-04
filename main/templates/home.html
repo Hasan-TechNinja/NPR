@@ -22,12 +22,16 @@
 </head>
 
 <div class="container mx-auto">
-    <div class="justify-center text-center py-10 bg-blue-200 rounded md:rounded-b-3xl">
+    <div class="justify-center text-center py-10 bg-sky-100 rounded md:rounded-b-3xl">
         <h1 class="text-2xl font-bold">Find The Product You Can Trust</h1>
         <h3 class="font-bold">Real views by real people</h3>
         <div>
-            <input class="border mt-5 rounded" type="text">
-            <input type="button" value="search" class="bg-blue-500 text-white p-1 px-2 mx-3 rounded">
+            <form action="{% url 'search' %}" method="GET">
+                <input type="text" id="search-query-mobile" name="query" placeholder="Search..." class="input input-bordered" required />
+                <button type="submit" class="p-2 rounded-lg ml-2 bg-blue-700 text-white">
+                    Search
+                  </button>
+            </form>
         </div>
     </div>
     <div class="glider-contain mx-2 w-screen">
