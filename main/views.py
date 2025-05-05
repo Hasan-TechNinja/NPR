@@ -48,15 +48,17 @@ class BrandDetailsView(View):
 class ProductDetailsView(View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
-        reviews = Review.objects.filter(product=product, active=True)
-        total_reviews = len(reviews)
+        my_reviews = Review.objects.filter(product=product, active=True, user = request.user)
+        others_review = Review.objects.filter(product=product, active=True)
+        total_reviews = len(my_reviews)
         form = ReviewModelForm()
 
         context = {
             'product': product,
-            'review': reviews,
+            'my_review': my_reviews,
             'form': form,
-            'total_reviews': total_reviews
+            'total_reviews': total_reviews,
+            'others_review': others_review
         }
         return render(request, 'productdetails.html', context)
     
@@ -86,10 +88,10 @@ def PostReview(request, pk):
             review.product = product
             review.active = True
             review.save()
-            form = ReviewModelForm()  # Clear form after submission
-            return redirect('postReview', pk=product.pk)
+            form = ReviewModelForm()
+            return redirect('pDetails', pk=product.pk)
     else:
-        form = ReviewModelForm(instance=user_review)
+        form = ReviewModelForm()
 
     context = {
         "product": product,
@@ -99,17 +101,23 @@ def PostReview(request, pk):
     return render(request, 'postreview.html', context)
 
 def Helpful(request, pk):
-    review = Review.objects.get(id=pk)
+    review = get_object_or_404(Review, id = pk)
+    product = review.product
     for i in range(1):
         review.helpful = review.helpful + 1
+        if review.not_helpful > 0:
+            review.not_helpful = review.not_helpful - 1
         review.save()
-        return redirect('home')
+        return redirect('pDetails', pk = product.id)
 
 def NotHelpful(request, pk):
-    review = Review.objects.get(id = pk)
+    review = get_object_or_404(Review, id = pk)
+    product = review.product
     review.not_helpful += 1
+    if review.helpful > 0:
+        review.helpful -= 1
     review.save()
-    return redirect('home')
+    return redirect('pDetails', pk = product.id)
 
 def UpdateReview(request, pk):
     review = get_object_or_404(Review, id=pk)
@@ -125,11 +133,6 @@ def UpdateReview(request, pk):
     }
     return render(request, 'reviewUpdate.html', context)
 
-# def DeleteReview(request, pk):
-#     review = get_object_or_404(Review, pk=pk, user = request.user)
-#     product = get_object_or_404(Product, review = review)
-#     review.delete()
-#     return redirect('pDetails', pk = pk)
 
 def DeleteReview(request, pk):
     review = get_object_or_404(Review, pk=pk, user=request.user)
