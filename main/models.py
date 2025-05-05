@@ -65,6 +65,7 @@ class Review(models.Model):
     helpful = models.PositiveIntegerField(default=0)
     not_helpful = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)  # track update time
     active = models.BooleanField(default=True)
 
     def __str__(self):

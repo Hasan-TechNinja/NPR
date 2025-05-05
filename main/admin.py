@@ -29,12 +29,12 @@ class VoteAdmin(admin.ModelAdmin):
     )
 admin.site.register(Vote, VoteAdmin)
 
+
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
-       'id', 'product', 'review', 'rating', 'created', 'helpful', 'not_helpful', 'active'
+        'id', 'user', 'product', 'review', 'rating', 'helpful', 'not_helpful', 'created', 'modified', 'active'
     )
-admin.site.register(Review)
-
+admin.site.register(Review, ReviewAdmin)
 
 class VisitorAdmin(admin.ModelAdmin):
     list_display = (

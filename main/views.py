@@ -121,16 +121,18 @@ def NotHelpful(request, pk):
 
 def UpdateReview(request, pk):
     review = get_object_or_404(Review, id=pk)
-    form = ReviewModelForm(request.POST, instance=review)
-    if form.is_valid():
-        review_update = form.save(commit=False)
-        review_update.update = timezone.now()
-        review_update.save()
-        # return redirect('pDetails', pk = review.id)
-        return redirect('home')
-    context = {
-        'form':form
-    }
+
+    if request.method == "POST":
+        form = ReviewModelForm(request.POST, instance=review)
+        if form.is_valid():
+            review_update = form.save(commit=False)
+            review_update.user = request.user
+            review_update.save()
+            return redirect('pDetails', pk=review.product.id)
+    else:
+        form = ReviewModelForm(instance=review)
+
+    context = {'form': form}
     return render(request, 'reviewUpdate.html', context)
 
 
