@@ -50,6 +50,7 @@ About {{ product.name }}
                             <p class="text-gray-700">{{ r.review }}</p>
                             <div class="items-center mt-2">
                                 <span class="text-yellow-500 font-medium">Rating: {{ r.rating }}/5</span>
+                                <span class="text-black font-medium">Created: {{ r.created }}</span>
                                 <div class="flex justify-between">
                                     <div class="mt-2 space-x-2">
                                         <a href="{% url 'helpful' r.id %}" class="inline-flex items-center text-sm text-gray-900 border p-2 rounded bg-lime-200">
@@ -81,6 +82,7 @@ About {{ product.name }}
                             <p class="text-gray-700">{{ othersReview.review }}</p>
                             <div class="items-center mt-2">
                                 <span class="text-yellow-500 font-medium">Rating: {{ othersReview.rating }}/5</span>
+                                <span class="text-black font-medium">Created: {{ othersReview.created }}</span>
                                 <div class="flex justify-between">
                                     <div class="mt-2 space-x-2">
                                         <a href="{% url 'helpful' othersReview.id %}" class="inline-flex items-center text-sm text-gray-900 border p-2 rounded bg-lime-200">

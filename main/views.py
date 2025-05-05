@@ -49,7 +49,7 @@ class ProductDetailsView(View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
         my_reviews = Review.objects.filter(product=product, active=True, user = request.user)
-        others_review = Review.objects.filter(product=product, active=True)
+        others_review = Review.objects.filter(product=product, active=True).order_by('-created')
         total_reviews = len(my_reviews)
         form = ReviewModelForm()
 
