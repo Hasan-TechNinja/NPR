@@ -51,10 +51,17 @@ class Product(models.Model):
     
 
 class Review(models.Model):
+    review_choice = {
+        '1':1,
+        '2':2,
+        '3':3,
+        '4':4,
+        '5':5
+    }
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
     review = models.TextField(max_length=800)
-    rating = models.PositiveIntegerField()
+    rating = models.CharField(max_length=1, choices=review_choice)
     helpful = models.PositiveIntegerField(default=0)
     not_helpful = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)

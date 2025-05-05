@@ -16,4 +16,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('helpful/<int:pk>', views.Helpful, name='helpful'),
     path('nhelpful/<int:pk>', views.NotHelpful, name='nhelpful'),
+    path('rupdate/<int:pk>', views.UpdateReview, name='updatereview'),
+    path('delete/<int:pk>', views.DeleteReview, name='delete'),
+    path('delete/', views.DeleteReview, name='delete'),
 ]

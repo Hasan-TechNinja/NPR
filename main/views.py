@@ -3,6 +3,7 @@ from django.views import View
 from . forms import BrandModelForm, ReviewModelForm
 from . models import Brand, Category, Product, Review, Vote
 from django.db.models import Q
+from django.utils import timezone
 
 # Create your views here.
 
@@ -109,6 +110,32 @@ def NotHelpful(request, pk):
     review.not_helpful += 1
     review.save()
     return redirect('home')
+
+def UpdateReview(request, pk):
+    review = get_object_or_404(Review, id=pk)
+    form = ReviewModelForm(request.POST, instance=review)
+    if form.is_valid():
+        review_update = form.save(commit=False)
+        review_update.update = timezone.now()
+        review_update.save()
+        # return redirect('pDetails', pk = review.id)
+        return redirect('home')
+    context = {
+        'form':form
+    }
+    return render(request, 'reviewUpdate.html', context)
+
+# def DeleteReview(request, pk):
+#     review = get_object_or_404(Review, pk=pk, user = request.user)
+#     product = get_object_or_404(Product, review = review)
+#     review.delete()
+#     return redirect('pDetails', pk = pk)
+
+def DeleteReview(request, pk):
+    review = get_object_or_404(Review, pk=pk, user=request.user)
+    product = review.product
+    review.delete()
+    return redirect('pDetails', pk=product.id)
 
 
 def BrandsView(request):
